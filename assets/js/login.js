@@ -20,18 +20,20 @@ $(function() {
     $("#form-reg").on("submit", function(e) {
         e.preventDefault();
         $.post('http://ajax.frontend.itheima.net/api/reguser', { username: $('#form-reg input:eq(0)').val(), password: $('#form-reg input:eq(1)').val() }, function(reg) {
-            if (reg.status !== 0) {
-                return console.log(reg.message);
-            }
+
         })
-        console.log("注册成功");
         var lname = $('#form-reg input:eq(0)').val();
         var lpwd = $('#form-reg input:eq(1)').val();
+        var lrpwd = $('#form-reg input:eq(2)').val();
+        if (lpwd === lrpwd) {
+            $(".login h5").click();
+        } else {
+            alert("两次密码不一致");
+        }
         localStorage.setItem('name', lname);
         localStorage.setItem('pwd', lpwd);
-        console.log(lname);
-        console.log(lpwd);
-        $(".login h5").click();
+        // console.log(lname);
+        // console.log(lpwd);
     })
     $("#form-index").on('submit', function(e) {
         e.preventDefault();
